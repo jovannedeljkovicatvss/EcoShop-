@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="sr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proizvodi - EcoShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigacija -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf"></i> EcoShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Početna</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="products.html">Proizvodi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Kalkulator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">O nama</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" id="themeToggle">
+                            <i class="fas fa-moon"></i> Tema
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Proizvodi -->
+    <section class="products py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Naši Proizvodi</h1>
+            
+            <!-- Filteri -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Pretraži proizvode...">
+                </div>
+                <div class="col-md-6">
+                    <select class="form-select" id="categoryFilter">
+                        <option value="all">Sve kategorije</option>
+                        <option value="energija">Štednja energije</option>
+                        <option value="voda">Štednja vode</option>
+                        <option value="kuca">Za dom</option>
+                        <option value="licna">Lična nega</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Lista proizvoda -->
+            <div class="row" id="productsList">
+                <!-- Proizvodi će se dinamički dodati -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Futer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-leaf"></i> EcoShop</h5>
+                    <p>Promovišemo održiv način života kroz ekološke proizvode.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">© 2025 EcoShop - <strong>Jovan Nedeljković</strong></p>
+                    <p>Kontakt: eco.shop@gmail.com | Tel: 018/123-456</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const products = [
+                { id: 1, name: "LED Sijalica 10W", category: "energija", price: "890 RSD", desc: "Štedi 85% energije, traje 25x duže od obične sijalice", icon: "fas fa-lightbulb" },
+                { id: 2, name: "Bambus Četkica za Zube", category: "licna", price: "450 RSD", desc: "Prirodna bambus četkica, biodegradabilna", icon: "fas fa-tooth" },
+                { id: 3, name: "Solarna Lampica", category: "energija", price: "1.450 RSD", desc: "Solarna lampa za baštu, puni se tokom dana", icon: "fas fa-sun" },
+                { id: 4, name: "Štedljivi Tuš Aparat", category: "voda", price: "1.250 RSD", desc: "Smanjuje potrošnju vode za 50%", icon: "fas fa-shower" },
+                { id: 5, name: "Ekološke Vrećice", category: "kuca", price: "350 RSD", desc: "Biodegradabilne vrećice za smeće", icon: "fas fa-shopping-bag" },
+                { id: 6, name: "Pametna Utikačnica", category: "energija", price: "2.990 RSD", desc: "WiFi utikačnica za kontrolu potrošnje", icon: "fas fa-plug" },
+                { id: 7, name: "Bambus Salvete", category: "licna", price: "650 RSD", desc: "100% bambus salvete, eko alternativа", icon: "fas fa-hand-sparkles" },
+                { id: 8, name: "Kompost Kanta", category: "kuca", price: "3.500 RSD", desc: "Kućna kanta za kompostiranje otpada", icon: "fas fa-recycle" }
+            ];
+            
+            const container = document.getElementById('productsList');
+            
+            function renderProducts(filteredProducts) {
+                container.innerHTML = '';
+                filteredProducts.forEach(product => {
+                    container.innerHTML += `
+                        <div class="col-md-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="${product.icon} fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">${product.desc}</p>
+                                    <p class="text-success fw-bold">${product.price}</p>
+                                    <button class="btn btn-success btn-sm" onclick="addToCart(${product.id})">
+                                        <i class="fas fa-cart-plus"></i> Dodaj u korpu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            renderProducts(products);
+            
+            // Filter funkcije
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const filtered = products.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) || 
+                    p.desc.toLowerCase().includes(searchTerm)
+                );
+                renderProducts(filtered);
+            });
+            
+            document.getElementById('categoryFilter').addEventListener('change', function(e) {
+                const category = e.target.value;
+                const filtered = category === 'all' 
+                    ? products 
+                    : products.filter(p => p.category === category);
+                renderProducts(filtered);
+            });
+            
+            window.addToCart = function(productId) {
+                alert(`Proizvod ${productId} dodat u korpu!`);
+                // Ovde bi se dodala logika za korpu
+            };
+        });
+    </script>
+</body>
+</html>

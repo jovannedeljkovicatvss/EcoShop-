@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="sr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoShop - Ekološka Prodavnica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigacija -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf"></i> EcoShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Početna</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Proizvodi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculator.html">Kalkulator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">O nama</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" id="themeToggle">
+                            <i class="fas fa-moon"></i> Tema
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero sekcija -->
+    <section class="hero-section">
+        <div class="container text-center py-5">
+            <h1 class="display-4 mb-4">Dobrodošli u <span class="text-success">EcoShop</span></h1>
+            <p class="lead mb-4">Vaša ekološka prodavnica za održivi način života</p>
+            <a href="products.html" class="btn btn-success btn-lg">
+                <i class="fas fa-shopping-cart"></i> Pogledajte proizvode
+            </a>
+        </div>
+    </section>
+
+    <!-- Usluge -->
+    <section class="services py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Zašto birati nas?</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body">
+                            <i class="fas fa-bolt fa-3x text-success mb-3"></i>
+                            <h4 class="card-title">Ušteda energije</h4>
+                            <p class="card-text">Naši proizvodi štede do 80% energije u odnosu na klasične.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body">
+                            <i class="fas fa-seedling fa-3x text-success mb-3"></i>
+                            <h4 class="card-title">Eko materijali</h4>
+                            <p class="card-text">Svi proizvodi su od prirodnih i reciklažnih materijala.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body">
+                            <i class="fas fa-hand-holding-usd fa-3x text-success mb-3"></i>
+                            <h4 class="card-title">Povoljne cene</h4>
+                            <p class="card-text">Kvalitet po pristupačnim cenama sa garancijom.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Istaknuti proizvodi -->
+    <section class="featured-products py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Istaknuti proizvodi</h2>
+            <div class="row" id="featuredProducts">
+                <!-- Proizvodi će se dinamički dodati -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Futer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-leaf"></i> EcoShop</h5>
+                    <p>Promovišemo održiv način života kroz ekološke proizvode.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">© 2025 EcoShop - <strong>Jovan Nedeljković</strong></p>
+                    <p>Kontakt: eco.shop@gmail.com | Tel: 018/123-456</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Naš JS -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Učitavanje istaknutih proizvoda
+        document.addEventListener('DOMContentLoaded', function() {
+            const featuredContainer = document.getElementById('featuredProducts');
+            const products = [
+                {
+                    id: 1,
+                    name: "LED Sijalica 10W",
+                    price: "890 RSD",
+                    desc: "Ekološka LED sijalica koja štedi 85% energije",
+                    icon: "fas fa-lightbulb"
+                },
+                {
+                    id: 2,
+                    name: "Bambus Četkica",
+                    price: "450 RSD",
+                    desc: "Prirodna bambus četkica za zube",
+                    icon: "fas fa-tooth"
+                },
+                {
+                    id: 3,
+                    name: "Solarna Lampica",
+                    price: "1.450 RSD",
+                    desc: "Solarna lampa za baštu ili terasu",
+                    icon: "fas fa-sun"
+                }
+            ];
+            
+            products.forEach(product => {
+                featuredContainer.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="${product.icon} fa-3x text-success mb-3"></i>
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.desc}</p>
+                                <p class="text-success fw-bold">${product.price}</p>
+                                <a href="products.html" class="btn btn-outline-success">Pogledaj</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

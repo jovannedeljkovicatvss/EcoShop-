@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="sr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator - EcoShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigacija -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf"></i> EcoShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Početna</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Proizvodi</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="calculator.html">Kalkulator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">O nama</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" id="themeToggle">
+                            <i class="fas fa-moon"></i> Tema
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Kalkulator -->
+    <section class="calculator py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Kalkulator Ekološke Uštede</h1>
+            
+            <div class="row">
+                <!-- Forma -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="fas fa-calculator"></i> Unesite podatke</h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Broj LED sijalica u kući:</label>
+                                <input type="range" class="form-range" min="0" max="20" value="5" id="ledCount">
+                                <div class="d-flex justify-content-between">
+                                    <span>0</span>
+                                    <span id="ledValue">5</span>
+                                    <span>20</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Štedljivi tuš aparati:</label>
+                                <select class="form-select" id="showerHeads">
+                                    <option value="0">Nema</option>
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3+</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Ekoloških vrećica mesečno:</label>
+                                <input type="number" class="form-control" id="ecoBags" value="10" min="0">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Pametnih utikačnica:</label>
+                                <input type="number" class="form-control" id="smartPlugs" value="2" min="0">
+                            </div>
+                            
+                            <button class="btn btn-success w-100" id="calculateBtn">
+                                <i class="fas fa-calculator"></i> Izračunaj uštedu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rezultati -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="fas fa-chart-line"></i> Rezultati</h4>
+                            
+                            <div id="results" style="display: none;">
+                                <div class="row text-center mb-4">
+                                    <div class="col-6">
+                                        <div class="p-3 bg-light rounded">
+                                            <h6>Mesečna ušteda</h6>
+                                            <h3 class="text-success" id="monthlySavings">0 RSD</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-3 bg-light rounded">
+                                            <h6>Godišnja ušteda</h6>
+                                            <h3 class="text-success" id="yearlySavings">0 RSD</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h6>Smanjenje CO₂ emisije:</h6>
+                                    <div class="progress" style="height: 25px;">
+                                        <div class="progress-bar bg-success" id="co2Progress" style="width: 0%"></div>
+                                    </div>
+                                    <div class="mt-2" id="co2Value">0 kg godišnje</div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h6>Raspodela uštede:</h6>
+                                    <canvas id="savingsChart" height="150"></canvas>
+                                </div>
+                                
+                                <div class="alert alert-info">
+                                    <i class="fas fa-lightbulb"></i> 
+                                    <strong>Savet:</strong> 
+                                    <span id="adviceText">Zamenom sijalica možete uštedeti značajne svote.</span>
+                                </div>
+                            </div>
+                            
+                            <div id="noResults" class="text-center py-4">
+                                <i class="fas fa-calculator fa-3x text-muted mb-3"></i>
+                                <p>Unesite podatke i kliknite na "Izračunaj uštedu"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Futer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-leaf"></i> EcoShop</h5>
+                    <p>Promovišemo održiv način života kroz ekološke proizvode.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">© 2025 EcoShop - <strong>Jovan Nedeljković</strong></p>
+                    <p>Kontakt: eco.shop@gmail.com | Tel: 018/123-456</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slider za LED sijalice
+            const ledSlider = document.getElementById('ledCount');
+            const ledValue = document.getElementById('ledValue');
+            
+            ledSlider.addEventListener('input', function() {
+                ledValue.textContent = this.value;
+            });
+            
+            // Kalkulator
+            document.getElementById('calculateBtn').addEventListener('click', calculateSavings);
+            
+            function calculateSavings() {
+                const ledCount = parseInt(document.getElementById('ledCount').value);
+                const showerHeads = parseInt(document.getElementById('showerHeads').value);
+                const ecoBags = parseInt(document.getElementById('ecoBags').value);
+                const smartPlugs = parseInt(document.getElementById('smartPlugs').value);
+                
+                // Kalkulacija
+                const ledSavings = ledCount * 500; // 500 RSD po sijalici godišnje
+                const showerSavings = showerHeads * 3000; // 3000 RSD po tušu
+                const bagsSavings = ecoBags * 20; // 20 RSD po vrećici
+                const plugsSavings = smartPlugs * 1500; // 1500 RSD po utikačnici
+                
+                const monthlyTotal = Math.round((ledSavings + showerSavings + bagsSavings + plugsSavings) / 12);
+                const yearlyTotal = ledSavings + showerSavings + bagsSavings + plugsSavings;
+                
+                const co2Reduction = (ledCount * 15) + (showerHeads * 5) + (ecoBags * 0.5) + (smartPlugs * 10);
+                const co2Percent = Math.min(co2Reduction / 100 * 100, 100);
+                
+                // Prikaz rezultata
+                document.getElementById('monthlySavings').textContent = monthlyTotal + ' RSD';
+                document.getElementById('yearlySavings').textContent = yearlyTotal + ' RSD';
+                document.getElementById('co2Value').textContent = co2Reduction + ' kg CO₂ godišnje';
+                document.getElementById('co2Progress').style.width = co2Percent + '%';
+                
+                // Generisanje saveta
+                let advice = '';
+                if (ledCount < 5) {
+                    advice = 'Preporučujemo da zamenite više sijalica sa LED sijalicama za veću uštedu.';
+                } else if (showerHeads === 0) {
+                    advice = 'Razmislite o ugradnji štedljivih tuš aparata za uštedu vode i energije.';
+                } else {
+                    advice = 'Odlično! Vaše ekološke navike doprinose zaštiti životne sredine.';
+                }
+                document.getElementById('adviceText').textContent = advice;
+                
+                // Prikaz rezultata
+                document.getElementById('results').style.display = 'block';
+                document.getElementById('noResults').style.display = 'none';
+                
+                // Kreiranje grafikona
+                createChart(ledSavings, showerSavings, bagsSavings, plugsSavings);
+            }
+            
+            function createChart(led, shower, bags, plugs) {
+                const ctx = document.getElementById('savingsChart').getContext('2d');
+                
+                // Uništavanje prethodnog grafikona ako postoji
+                if (window.savingsChartInstance) {
+                    window.savingsChartInstance.destroy();
+                }
+                
+                window.savingsChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['LED sijalice', 'Tuševi', 'Vrećice', 'Utikačnice'],
+                        datasets: [{
+                            data: [led, shower, bags, plugs],
+                            backgroundColor: [
+                                '#2E8B57',
+                                '#3CB371',
+                                '#8FBC8F',
+                                '#66CDAA'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
